@@ -1,8 +1,8 @@
 # unplugin-auto-export
 
-[中文文档](/README-zh.md)
+`unplugin-auto-export` is a plugin designed specifically for Vite and Webpack build tools, that automates the maintenance of export statements in `index.ts` files, reducing the manual effort of writing `export` statements. It's especially useful in large projects where managing export statements can become cumbersome.
 
-`unplugin-auto-export` is a Vite plugin that automates the maintenance of export statements in `index.ts` files, reducing the manual effort of writing `export` statements. It's especially useful in large projects where managing export statements can become cumbersome.
+[中文文档](/README-zh.md)
 
 ## Features
 

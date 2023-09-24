@@ -1,0 +1,42 @@
+name: Publish Package To Npmjs
+
+on:
+  workflow_dispatch:
+  push:
+    tags:
+      - "v*"
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout 🛎️
+        uses: actions/checkout@v3.5.3
+
+      - name: Configure Git
+        run: |
+          git config user.email "772567615@qq.com"
+          git config user.name "coderhyh"
+
+      - name: Install pnpm
+        uses: pnpm/action-setup@v2
+        with:
+          version: "8.x"
+
+      - uses: actions/setup-node@v3.7.0
+        with:
+          node-version: "16.x"
+          registry-url: "https://registry.npmjs.org/"
+          cache: pnpm
+
+      - name: ⏳ Install dependencies
+        run: pnpm i
+
+      - name: 👷  Build lib
+        run: pnpm run build
+
+      - name: 📦 Publish
+        run: npm publish
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+          NPM_TOKEN: ${{ secrets.NPM_TOKEN }}

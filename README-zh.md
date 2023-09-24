@@ -1,6 +1,6 @@
 # unplugin-auto-export
 
-`unplugin-auto-export` 是一个用于 Vite 的插件，它可以自动化维护 `index.ts` 文件中的导出语句，减轻手动编写 `export` 语句的工作负担。在大型项目中，特别是在需要管理许多导出语句时，这个插件尤其有用。
+`unplugin-auto-export` 是一个专为 Vite 和 Webpack 构建工具设计的插件，它可以自动化维护 `index.ts` 文件中的导出语句，减轻手动编写 `export` 语句的工作负担。在大型项目中，特别是在需要管理许多导出语句时，这个插件尤其有用。
 
 ## 功能特点
 

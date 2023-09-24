@@ -4,7 +4,7 @@ export function toHump(s: string) {
   return s.replace(/^[A-z\d]|[-_]([A-z\d])/g, (v, $1) => ($1 ? $1.toUpperCase() : v.toUpperCase()))
 }
 export function throwError() {
-  throw new Error('Path rule does not match. Please check the path format. See: https://github.com/coderhyh/unplugin-auto-export#Error Handling')
+  throw new Error('Path rule does not match. Please check the path format. See: https://github.com/coderhyh/unplugin-auto-export#error-handling')
 }
 export function replacePath(path: string, alias: AliasOptions & Alias[]) {
   const firstPath = path[0]
