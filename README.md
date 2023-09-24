@@ -10,7 +10,7 @@
 - Updates the `index.ts` file within those directories with the appropriate `export` statements.
 - Configurable to ignore specific files or directories.
 - Supports `ts | js` file extensions (default is `.ts`).
-- Handles component directories with options to specify component directories (optional).
+- Handles component directories with options to specify component directories.
 
 ## Installation
 
@@ -69,8 +69,9 @@ module.exports = {
 - `ignore` (`string[]`): Directories or files to ignore during watching. **(optional)**
   - Follows the same path rule as `path`.
 - `extname` (`string`): The file extension to use for the `index` files (default is `ts`).
+  - support `ts | js`.
 - `componentDirs` (`string[]`): Component directories to handle. **(optional)**
-  - For example, if you pass `componentDirs`: ['components'],
+  - For example, if you pass `componentDirs: ['components']`,
   - The generated `export` statement will be: `export { default as ZForm } from './z-form.vue'`.
 
 ## Error Handling

@@ -40,7 +40,7 @@ export default defineConfig({
       path: ['~/views/**/{components,hooks}/*', '~/hooks/*'], // 要监听的文件夹, 路径可以使用别名
       ignore: ['**/node_modules'], // 要忽略的文件夹或文件（可选）
       componentDirs: ['components'], // 处理的组件文件夹（可选）
-      extname: 'ts', // 文件扩展名（默认为 'ts'）`'ts' | 'js'`
+      extname: 'ts', // 文件扩展名（默认为 'ts'）'ts' | 'js'
     }),
   ],
 });
@@ -67,6 +67,7 @@ module.exports = {
 - `ignore`（`string[]`）：在监听时要忽略的文件夹或文件。**（可选）**
   - 同 `path` 规则
 - `extname`（`string`）：用于 `index` 文件的文件扩展名（默认为 `ts`）
+  - 支持 `ts | js`
 - `componentDirs`（`string[]`）：要处理的组件文件夹。 **（可选）**
   - 比如以上的例子中传入的是 `componentDirs: ['components']`
   - 那么输出的 `export` 语句就是: `export { default as ZForm } from './z-form.vue'`
