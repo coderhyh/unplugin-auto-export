@@ -1,7 +1,7 @@
 {
   "name": "unplugin-auto-export",
   "type": "module",
-  "version": "0.1.0",
+  "version": "0.0.4",
   "packageManager": "pnpm@8.6.12",
   "description": "",
   "license": "MIT",
@@ -73,8 +73,8 @@
     "dist"
   ],
   "scripts": {
-    "build": "tsup",
-    "dev": "tsup --watch src",
+    "build": "tsup-node",
+    "dev": "tsup-node --watch src",
     "build:fix": "esno scripts/postbuild.ts",
     "lint": "eslint .",
     "play": "npm -C playground run dev",
