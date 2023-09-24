@@ -1,9 +1,8 @@
 {
   "name": "unplugin-auto-export",
-  "type": "module",
   "version": "0.0.6",
   "packageManager": "pnpm@8.6.12",
-  "description": "",
+  "description": "Automates the maintenance of export statements in the index.ts file.",
   "license": "MIT",
   "homepage": "https://github.com/coderhyh/unplugin-auto-export#readme",
   "repository": {
