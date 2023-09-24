@@ -59,7 +59,7 @@ module.exports = {
 }
 ```
 
-2. Run your Vite project, and the `unplugin-auto-export` plugin will automatically maintain the `index.ts` files in the specified directories.
+2. Run your project, and the `unplugin-auto-export` plugin will automatically maintain the `index.ts` files in the specified directories.
 
 ## Configuration Options
 
@@ -77,7 +77,8 @@ module.exports = {
 ## Error Handling
 
 - The `unplugin-auto-export` plugin enforces a specific path rule: `/\/\*(\.[\w\d]+)?$/`.
-  - When using a wildcard pattern, it only requires ending with `*` or `*.ts`. Typically, ending with `*` is sufficient.
+  - When using a wildcard pattern, it only requires ending with `/*` or `/*.ts`. Typically, ending with `/*` is sufficient.
+  - Because this is the only way to indicate monitoring files within a specific folder.
 - If the path does not match this rule, the plugin will throw an error with the message: `Path rule does not match. Please check the path format.`
 - Correct examples: `~/views/**/{components,hooks}/* or src/hooks/*.ts`
   - `~` is the path alias configured in `Vite`.

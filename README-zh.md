@@ -57,7 +57,7 @@ module.exports = {
 }
 ```
 
-2. 运行您的 Vite 项目，`unplugin-auto-export` 插件将自动维护指定文件夹中的 `index.ts` 文件。
+2. 运行你的项目，`unplugin-auto-export` 插件将自动维护指定文件夹中的 `index.ts` 文件。
 
 ## 配置选项
 
@@ -75,7 +75,8 @@ module.exports = {
 ## 错误处理
 
 - `unplugin-auto-export` 插件强制执行特定的路径规则：`/\/\*(\.[\w\d]+)?$/`
-  - **使用通配符模式, 只是需要结尾为 `*` or `*.ts`。通常结尾为 `*` 即可**
+  - **使用通配符模式, 只是需要结尾为 `/*` or `/*.ts`。通常结尾为 `/*` 即可**
+  - 因为只有这样才会表示监听某个文件夹内部文件
 - 如果路径不符合此规则，插件将抛出错误，并显示消息：`Path rule does not match. Please check the path format.`
 - 正确例子: `~/views/**/{components,hooks}/*` 或者 `src/hooks/*.ts`
   - `~` 是 `Vite` 中配置的路径别名
