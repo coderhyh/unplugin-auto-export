@@ -3,17 +3,17 @@
 ## Project setup
 
 ```bash
-pnpm install
+npm install
 ```
 
 ### Compiles and hot-reloads for development
 
 ```bash
-pnpm serve
+npm run serve
 ```
 
 ### Compiles and minifies for production
 
 ```bash
-pnpm build
+npm run build
 ```
