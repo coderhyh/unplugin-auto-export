@@ -52,7 +52,7 @@ export default defineConfig({
 module.exports = {
   /* ... */
   plugins: [
-    require('unplugin-auto-export/webpack')({ /* options */ }),
+    require('unplugin-auto-export/webpack').default({ /* options */ }),
   ],
 }
 ```
