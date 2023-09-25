@@ -1,6 +1,6 @@
 {
   "name": "unplugin-auto-export",
-  "version": "0.0.9",
+  "version": "0.1.0",
   "packageManager": "pnpm@8.6.12",
   "description": "Automates the maintenance of export statements in the index.ts file.",
   "author": "coderhyh <coderhyh@gmail.com>",
