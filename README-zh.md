@@ -81,6 +81,12 @@ module.exports = {
 - 正确例子: `~/views/**/{components,hooks}/*` 或者 `src/hooks/*.ts`
   - `~` 是 `Vite` 中配置的路径别名
 
+## 例子
+
+[Vite](/playground/vite)
+
+[Webpack](/playground/webpack)
+
 ## 贡献
 
 如果您遇到任何问题或有改进建议，欢迎提交[问题](https://github.com/coderhyh/unplugin-auto-export/issues)或[贡献代码](https://github.com/coderhyh/unplugin-auto-export)。

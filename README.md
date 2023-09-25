@@ -83,6 +83,12 @@ module.exports = {
 - Correct examples: `~/views/**/{components,hooks}/* or src/hooks/*.ts`
   - `~` is the path alias configured in `Vite`.
 
+## Example
+
+[Vite](/playground/vite)
+
+[Webpack](/playground/webpack)
+
 ## Contributing
 
 If you encounter any issues or have suggestions for improvements, feel free to [open an issue](https://github.com/coderhyh/unplugin-auto-export/issues) or [contribute to the project](https://github.com/coderhyh/unplugin-auto-export).
