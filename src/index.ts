@@ -11,6 +11,8 @@ export const unpluginFactory: UnpluginFactory<Options | undefined> = options => 
   //   return id.endsWith('main.ts')
   // },
   webpack(compiler) {
+    if (compiler.options.mode === 'production')
+      return
     const alias = compiler.options?.resolve?.alias
     const aliasList: AliasOptions & Alias[] = Object.keys(alias ?? {}).map(k => ({
       find: k,
@@ -20,6 +22,8 @@ export const unpluginFactory: UnpluginFactory<Options | undefined> = options => 
   },
   vite: {
     configResolved(config: ResolvedConfig) {
+      if (config.env.PROD)
+        return
       unpluginAutoExport(options!, config.resolve.alias)
     },
   },
