@@ -1,11 +1,12 @@
 import type { UnpluginFactory } from 'unplugin'
 import { createUnplugin } from 'unplugin'
 import type { Alias, AliasOptions, ResolvedConfig } from 'vite'
-import type { Options } from './types'
-
+import type chokidar from 'chokidar'
+import type { IOptions } from './types'
 import { unpluginAutoExport } from './core'
 
-export const unpluginFactory: UnpluginFactory<Options | undefined> = options => ({
+let watcher: chokidar.FSWatcher | undefined
+export const unpluginFactory: UnpluginFactory<IOptions> = options => ({
   name: 'unplugin-auto-export',
   // transformInclude(id) {
   //   return id.endsWith('main.ts')
@@ -18,13 +19,13 @@ export const unpluginFactory: UnpluginFactory<Options | undefined> = options => 
       find: k,
       replacement: alias![k as keyof typeof alias],
     }))
-    unpluginAutoExport(options!, aliasList)
+    unpluginAutoExport(options, aliasList)
   },
   vite: {
+    apply: 'serve',
     configResolved(config: ResolvedConfig) {
-      if (config.env.PROD)
-        return
-      unpluginAutoExport(options!, config.resolve.alias)
+      watcher?.close()
+      watcher = unpluginAutoExport(options, config.resolve.alias)
     },
   },
 })

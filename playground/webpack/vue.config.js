@@ -7,7 +7,6 @@ module.exports = defineConfig({
     plugins: [
       AutoExport({
         path: ['src/components/*'],
-        componentDirs: ['components'],
       }),
     ],
   },

@@ -10,7 +10,7 @@
 - Updates the `index.ts` file within those directories with the appropriate `export` statements.
 - Configurable to ignore specific files or directories.
 - Supports `ts | js` file extensions (default is `.ts`).
-- Handles component directories with options to specify component directories.
+- Custom export format.
 
 ## Installation
 
@@ -39,10 +39,14 @@ export default defineConfig({
 
   plugins: [
     AutoExport({
-      path: ['~/views/**/{components,hooks}/*', '~/hooks/*'], // Directories to watch, paths can use aliases
-      ignore: ['**/node_modules'], // Directories or files to ignore (optional)
-      componentDirs: ['components'], // Component directories to handle (optional)
-      extname: 'ts', // File extension (default is 'ts') `ts` | `js`
+      // Directories to watch, paths can use aliases; It just needs to end with /*
+      path: ['~/views/**/{components,hooks}/*', '~/hooks/*'],
+      // Directories or files to ignore (optional)
+      ignore: ['**/node_modules'],
+      // File extension (default is 'ts') `ts` | `js`
+      extname: 'ts',
+      // Custom export format
+      formatter: (filename, extname) => `export * from './${filename}'`
     }),
   ],
 });
@@ -70,9 +74,7 @@ module.exports = {
   - Follows the same path rule as `path`.
 - `extname` (`string`): The file extension to use for the `index` files (default is `ts`).
   - support `ts | js`.
-- `componentDirs` (`string[]`): Component directories to handle. **(optional)**
-  - For example, if you pass `componentDirs: ['components']`,
-  - The generated `export` statement will be: `export { default as ZForm } from './z-form.vue'`.
+- `formatter`(`(filename: string, extname: string) => string`): Custom export format
 
 ## Error Handling
 
@@ -81,7 +83,7 @@ module.exports = {
   - Because this is the only way to indicate monitoring files within a specific folder.
 - If the path does not match this rule, the plugin will throw an error with the message: `Path rule does not match. Please check the path format.`
 - Correct examples: `~/views/**/{components,hooks}/* or src/hooks/*.ts`
-  - `~` is the path alias configured in `Vite`.
+  - "~" is a configured path alias.
 
 ## Example
 

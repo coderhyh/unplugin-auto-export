@@ -4,11 +4,11 @@
 
 ## 功能特点
 
-- 自动监听指定的文件夹以检测文件变化。
-- 更新这些文件夹内的 `index.ts` 文件，写入正确的 `export` 语句。
-- 可配置以忽略特定文件或文件夹。
-- 支持 `ts | js` 的文件扩展名（默认为 `.ts`）。
-- 处理组件文件夹，并提供选项以指定组件文件夹。
+- 自动监听指定的文件夹以检测文件变化
+- 更新这些文件夹内的 `index.ts` 文件，写入正确的 `export` 语句
+- 可配置以忽略特定文件或文件夹
+- 支持 `ts | js` 的文件扩展名（默认为 `.ts`）
+- 自定义导出格式
 
 ## 安装
 
@@ -37,10 +37,14 @@ export default defineConfig({
 
   plugins: [
     AutoExport({
-      path: ['~/views/**/{components,hooks}/*', '~/hooks/*'], // 要监听的文件夹, 路径可以使用别名
-      ignore: ['**/node_modules'], // 要忽略的文件夹或文件（可选）
-      componentDirs: ['components'], // 处理的组件文件夹（可选）
-      extname: 'ts', // 文件扩展名（默认为 'ts'）'ts' | 'js'
+      // 要监听的文件夹, 路径可以使用别名; 以 /* 结尾即可
+      path: ['~/views/**/{components,hooks}/*', './src/hooks/*'],
+      // 要忽略的文件夹或文件（可选）
+      ignore: ['**/node_modules'],
+      // 文件扩展名（默认为 'ts'）'ts' | 'js'
+      extname: 'ts',
+      // 自定义导出格式
+      formatter: (filename, extname) => `export * from './${filename}'`
     }),
   ],
 });
@@ -61,16 +65,14 @@ module.exports = {
 
 ## 配置选项
 
-- `path`（`string` 或 `string[]`）：要监听变化的文件夹。可以是单个字符串或字符串数组
+- `path`(`string` 或 `string[]`): 要监听变化的文件夹。可以是单个字符串或字符串数组
   - 可以使用自己配置的路径别名
-  - **要使用通配符匹配模式, 如: `~/views/**/{components,hooks}/*` 或者 `src/hooks/*.ts`**
-- `ignore`（`string[]`）：在监听时要忽略的文件夹或文件。**（可选）**
+  - **使用通配符匹配模式, 如: `~/views/**/{components,hooks}/*` 或者 `src/hooks/*.ts`**
+- `ignore`(`string[]`): 在监听时要忽略的文件夹或文件。**（可选）**
   - 同 `path` 规则
-- `extname`（`string`）：用于 `index` 文件的文件扩展名（默认为 `ts`）
+- `extname`(`string`): 用于 `index` 文件的文件扩展名（默认为 `ts`）
   - 支持 `ts | js`
-- `componentDirs`（`string[]`）：要处理的组件文件夹。 **（可选）**
-  - 比如以上的例子中传入的是 `componentDirs: ['components']`
-  - 那么输出的 `export` 语句就是: `export { default as ZForm } from './z-form.vue'`
+- `formatter`(`(filename: string, extname: string) => string`): 自定义导出格式
 
 ## 错误处理
 
@@ -79,7 +81,7 @@ module.exports = {
   - 因为只有这样才会表示监听某个文件夹内部文件
 - 如果路径不符合此规则，插件将抛出错误，并显示消息：`Path rule does not match. Please check the path format.`
 - 正确例子: `~/views/**/{components,hooks}/*` 或者 `src/hooks/*.ts`
-  - `~` 是 `Vite` 中配置的路径别名
+  - `~` 是配置的路径别名
 
 ## 例子
 
