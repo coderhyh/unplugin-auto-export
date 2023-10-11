@@ -9,7 +9,7 @@
 - Automatically watches specified directories for file changes.
 - Updates the `index.ts` file within those directories with the appropriate `export` statements.
 - Configurable to ignore specific files or directories.
-- Supports `ts | js` file extensions (default is `.ts`).
+- Supports `ts | js` file extensions (default is `ts`).
 - Custom export format.
 
 ## Installation
