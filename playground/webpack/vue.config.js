@@ -6,7 +6,7 @@ module.exports = defineConfig({
   configureWebpack: {
     plugins: [
       AutoExport({
-        path: ['src/components/*'],
+        path: ['@/components/*'],
       }),
     ],
   },
