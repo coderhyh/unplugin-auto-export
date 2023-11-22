@@ -42,7 +42,7 @@ export default defineConfig({
       // Directories to watch, paths can use aliases; It just needs to end with /*
       path: ['~/views/**/{components,hooks}/*', '~/hooks/*'],
       // Directories or files to ignore (optional)
-      ignore: ['**/node_modules'],
+      ignore: ['**/node_modules/*'],
       // File extension (default is 'ts') `ts` | `js`
       extname: 'ts',
       // Custom export format

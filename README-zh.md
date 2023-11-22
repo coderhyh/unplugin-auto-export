@@ -40,7 +40,7 @@ export default defineConfig({
       // 要监听的文件夹, 路径可以使用别名; 以 /* 结尾即可
       path: ['~/views/**/{components,hooks}/*', './src/hooks/*'],
       // 要忽略的文件夹或文件（可选）
-      ignore: ['**/node_modules'],
+      ignore: ['**/node_modules/*'],
       // 文件扩展名（默认为 'ts'）'ts' | 'js'
       extname: 'ts',
       // 自定义导出格式
