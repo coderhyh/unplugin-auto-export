@@ -76,6 +76,7 @@
     "dev": "tsup-node --watch src",
     "build:fix": "esno scripts/postbuild.ts",
     "lint": "eslint .",
+    "lint:fix": "eslint . --fix",
     "play": "npm -C playground run dev",
     "prepublishOnly": "npm run build",
     "release": "bumpp",
@@ -91,7 +92,13 @@
     "webpack": "^4 || ^5"
   },
   "peerDependenciesMeta": {
-    "webpack": {
+    "@nuxt/kit": {
+      "optional": true
+    },
+    "@nuxt/schema": {
+      "optional": true
+    },
+    "esbuild": {
       "optional": true
     },
     "rollup": {
@@ -100,13 +107,7 @@
     "vite": {
       "optional": true
     },
-    "esbuild": {
-      "optional": true
-    },
-    "@nuxt/kit": {
-      "optional": true
-    },
-    "@nuxt/schema": {
+    "webpack": {
       "optional": true
     }
   },
@@ -115,14 +116,15 @@
     "unplugin": "^1.4.0"
   },
   "devDependencies": {
-    "@antfu/eslint-config": "^0.40.2",
+    "@antfu/eslint-config": "^2.6.1",
     "@nuxt/kit": "^3.6.5",
     "@nuxt/schema": "^3.6.5",
     "@types/node": "^20.5.2",
     "bumpp": "^9.2.0",
     "chalk": "^5.3.0",
-    "eslint": "^8.47.0",
+    "eslint": "^8.56.0",
     "esno": "^0.17.0",
+    "fast-glob": "^3.3.1",
     "nodemon": "^3.0.1",
     "rimraf": "^5.0.1",
     "rollup": "^3.28.1",
@@ -130,7 +132,6 @@
     "typescript": "^5.1.6",
     "vite": "^4.4.9",
     "vitest": "^0.34.2",
-    "fast-glob": "^3.3.1",
     "webpack": "^5.88.2"
   }
 }

@@ -38,7 +38,8 @@ export function unpluginAutoExport(config: IOptions, alias: AliasOptions & Alias
           default:
             return `export * from './${filename}'`
         }
-      }).join('\n')
+      })
+      .join('\n')
     const indexFileContent = `${exportList || 'export {}'}\n`
     fs.writeFileSync(indexFilePath, indexFileContent)
   }
