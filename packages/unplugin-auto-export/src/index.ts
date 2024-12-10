@@ -2,7 +2,7 @@ import type { UnpluginFactory } from 'unplugin'
 import { createUnplugin } from 'unplugin'
 import type { Alias, AliasOptions, ResolvedConfig } from 'vite'
 import type chokidar from 'chokidar'
-import type { IOptions } from './types'
+import type { IOptions, TAlias } from './types'
 import { unpluginAutoExport } from './core'
 
 let watcher: chokidar.FSWatcher | undefined
@@ -15,7 +15,7 @@ export const unpluginFactory: UnpluginFactory<IOptions> = options => ({
     if (compiler.options.mode === 'production')
       return
     const alias = compiler.options?.resolve?.alias
-    const aliasList: AliasOptions & Alias[] = Object.keys(alias ?? {}).map(k => ({
+    const aliasList: TAlias = Object.keys(alias ?? {}).map(k => ({
       find: k,
       replacement: alias![k as keyof typeof alias],
     }))

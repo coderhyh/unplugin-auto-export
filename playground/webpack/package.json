@@ -13,6 +13,6 @@
   "devDependencies": {
     "@vue/cli-plugin-babel": "~5.0.0",
     "@vue/cli-service": "~5.0.0",
-    "unplugin-auto-export": "latest"
+    "unplugin-auto-export": "workspace:*"
   }
 }
