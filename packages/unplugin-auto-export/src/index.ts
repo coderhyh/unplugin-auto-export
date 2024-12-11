@@ -1,7 +1,7 @@
 import type { UnpluginFactory } from 'unplugin'
 import { createUnplugin } from 'unplugin'
-import type { Alias, AliasOptions, ResolvedConfig } from 'vite'
-import type chokidar from 'chokidar'
+import type { ResolvedConfig } from 'vite'
+import type * as chokidar from 'chokidar'
 import type { IOptions, TAlias } from './types'
 import { unpluginAutoExport } from './core'
 

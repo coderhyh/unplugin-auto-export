@@ -1,6 +1,6 @@
 import fs from 'node:fs'
 import { basename, dirname, join } from 'node:path'
-import chokidar from 'chokidar'
+import * as chokidar from 'chokidar'
 import type { IOptions, IWatchContext, TAlias, TFileType } from '../types'
 import { defaultFilter, defaultFormatter, parsePath } from './utils'
 
@@ -12,15 +12,18 @@ const defaultOptions: Required<IOptions> = {
   formatter: defaultFormatter,
 }
 
-export function unpluginAutoExport({
-  path = [...defaultOptions.path],
-  ignore = [...defaultOptions.ignore],
-  extname = defaultOptions.extname,
-  formatter = defaultOptions.formatter,
-  filter = defaultFilter,
-}: IOptions, alias: TAlias): chokidar.FSWatcher {
-  const splitReg = /\.(?=[^\.]+$)/g
+const splitReg = /\.(?=[^\.]+$)/g
 
+export function unpluginAutoExport(
+  {
+    path = [...defaultOptions.path],
+    ignore = [...defaultOptions.ignore],
+    extname = defaultOptions.extname,
+    formatter = defaultOptions.formatter,
+    filter = defaultFilter,
+  }: IOptions,
+  alias: TAlias,
+): chokidar.FSWatcher {
   /**
    * Cache the file content to avoid unnecessary write
    *
@@ -29,7 +32,11 @@ export function unpluginAutoExport({
    */
   const cache = new Map<string, string>()
 
-  const handleDir = (event: 'add' | 'addDir' | 'change' | 'unlink' | 'unlinkDir', watchedPath: string) => {
+  const handleDir = (
+    event: 'add' | 'addDir' | 'change' | 'unlink' | 'unlinkDir',
+    watchedPath: string,
+  ) => {
+    // ignore the change event
     if (event === 'change')
       return
 
@@ -37,15 +44,29 @@ export function unpluginAutoExport({
     const indexFileName = `index.${extname}`
     const indexFullPath = join(dirPath, indexFileName)
 
-    if (basename(watchedPath) === indexFileName || !fs.existsSync(dirPath))
+    // if the parent directory is not exist, return
+    if (!fs.existsSync(dirPath))
       return
+
+    // if the file is index file, try to update the parent index file if it already handled, otherwise return.
+    // this logic is for the case that user want to handle child directory.
+    if (basename(watchedPath) === indexFileName && event === 'add') {
+      const parent = join(dirPath, '../index.ts')
+      if (cache.has(parent))
+        handleDir('addDir', dirPath)
+      return
+    }
 
     const files = fs
       .readdirSync(dirPath)
       // map to IWatchContext
       .map((basename) => {
         const fullpath = join(dirPath, basename)
-        const [filename, extname] = (fs.statSync(fullpath).isFile() ? basename.split(splitReg) : [basename, undefined]) as [string, TFileType]
+        const [filename, extname] = (
+          fs.statSync(fullpath).isFile()
+            ? basename.split(splitReg)
+            : [basename, undefined]
+        ) as [string, TFileType]
         return {
           filename,
           extname,

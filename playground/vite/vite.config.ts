@@ -15,7 +15,7 @@ export default defineConfig({
       filter: ({ basename, dirPath, extname }) =>
         basename !== `ignore.ts` && // ignore this file if it's named `ignore.ts`
         basename !== `index.${extname}` &&
-        (fs.statSync(join(dirPath, basename)).isFile() || fs.statSync(join(dirPath, basename, `index.ts`)).isFile()),
+        (fs.statSync(join(dirPath, basename)).isFile() || (fs.existsSync(join(dirPath, basename, `index.ts`)) && fs.statSync(join(dirPath, basename, `index.ts`)).isFile())),
 
       formatter: (filename, extname, { basename }) => {
         switch (extname) {
