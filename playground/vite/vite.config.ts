@@ -10,12 +10,12 @@ export default defineConfig({
   plugins: [
     vue(),
     AutoExport({
-      path: ['src/components/*'],
+      path: ['src/components/**/*'],
 
       filter: ({ basename, dirPath, extname }) =>
         basename !== `ignore.ts` && // ignore this file if it's named `ignore.ts`
         basename !== `index.${extname}` &&
-        fs.statSync(join(dirPath, basename)).isFile(),
+        (fs.statSync(join(dirPath, basename)).isFile() || fs.statSync(join(dirPath, basename, `index.ts`)).isFile()),
 
       formatter: (filename, extname, { basename }) => {
         switch (extname) {

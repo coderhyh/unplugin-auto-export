@@ -46,6 +46,9 @@ export interface IOptions {
   filter?: IFilter
 }
 
-export type TFileType = 'ts' | 'js' | 'vue' | 'json'
+/**
+ * The type of the file extension. It will be `undefined` if the file extension is unknown or it's a directory.
+ */
+export type TFileType = 'ts' | 'js' | 'vue' | 'json' | undefined
 
 export type TAlias = import('vite').AliasOptions & import('vite').Alias[]

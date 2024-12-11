@@ -21,19 +21,31 @@ export function unpluginAutoExport({
 }: IOptions, alias: TAlias): chokidar.FSWatcher {
   const splitReg = /\.(?=[^\.]+$)/g
 
-  const handleDir = (_path: string) => {
-    const dirPath = dirname(_path)
+  /**
+   * Cache the file content to avoid unnecessary write
+   *
+   * - key: fullpath
+   * - value: content
+   */
+  const cache = new Map<string, string>()
+
+  const handleDir = (event: 'add' | 'addDir' | 'change' | 'unlink' | 'unlinkDir', watchedPath: string) => {
+    if (event === 'change')
+      return
+
+    const dirPath = dirname(watchedPath)
     const indexFileName = `index.${extname}`
     const indexFullPath = join(dirPath, indexFileName)
 
-    if (basename(_path) === indexFileName)
+    if (basename(watchedPath) === indexFileName || !fs.existsSync(dirPath))
       return
 
     const files = fs
       .readdirSync(dirPath)
       // map to IWatchContext
       .map((basename) => {
-        const [filename, extname] = basename.split(splitReg) as [string, TFileType]
+        const fullpath = join(dirPath, basename)
+        const [filename, extname] = (fs.statSync(fullpath).isFile() ? basename.split(splitReg) : [basename, undefined]) as [string, TFileType]
         return {
           filename,
           extname,
@@ -49,6 +61,11 @@ export function unpluginAutoExport({
       .join('\n')
 
     const indexFileContent = `${exportList || 'export {}'}\n`
+
+    if (cache.get(indexFullPath) === indexFileContent)
+      return
+
+    cache.set(indexFullPath, indexFileContent)
     fs.writeFileSync(indexFullPath, indexFileContent)
   }
 
@@ -56,9 +73,7 @@ export function unpluginAutoExport({
   ignore = parsePath(ignore, alias)
 
   const watcher = chokidar.watch(path, { ignored: ignore })
-  watcher
-    .on('unlink', handleDir)
-    .on('add', handleDir)
+  watcher.on('all', handleDir)
 
   return watcher
 }
