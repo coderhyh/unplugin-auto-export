@@ -40,7 +40,7 @@ export function unpluginAutoExport(config: IOptions, alias: AliasOptions & Alias
         }
       })
       .join('\n')
-    const indexFileContent = `${exportList || 'export {}'}\n`
+    const indexFileContent = `/* eslint-disable */\n${exportList || 'export {}'}\n`
     fs.writeFileSync(indexFilePath, indexFileContent)
   }
   const init = () => {
