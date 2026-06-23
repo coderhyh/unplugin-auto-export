@@ -35,21 +35,9 @@
       "import": "./dist/webpack.mjs",
       "require": "./dist/webpack.js"
     },
-    "./rollup": {
-      "types": "./dist/rollup.d.ts",
-      "import": "./dist/rollup.mjs",
-      "require": "./dist/rollup.js"
-    },
-    "./esbuild": {
-      "types": "./dist/esbuild.d.ts",
-      "import": "./dist/esbuild.mjs",
-      "require": "./dist/esbuild.js"
-    },
-    "./nuxt": {
-      "types": "./dist/nuxt.d.ts",
-      "import": "./dist/nuxt.mjs",
-      "require": "./dist/nuxt.js"
-    },
+    "./rollup": null,
+    "./esbuild": null,
+    "./nuxt": null,
     "./types": {
       "types": "./dist/types.d.ts",
       "import": "./dist/types.mjs",
